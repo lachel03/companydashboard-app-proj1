@@ -20,15 +20,17 @@ class DatabaseSeeder extends Seeder
             'code' => 'SCHNEE',
             'primary_color' => '#E8F4F8',
             'accent_color' => '#5DADE2',
+			'logo_url' => 'https://static.wikia.nocookie.net/tales-of-rwby-encyclopedia/images/6/63/Schnee_Dust_Company_Emblem.png'
         ]);
 
         $mistral = Company::create([
-            'name' => 'Mistral Trading Group',
-            'code' => 'MISTRAL',
+            'name' => 'White Fang Group',
+            'code' => 'WHITEFANG',
             'primary_color' => '#2C3E50',
             'accent_color' => '#E74C3C',
-        ]);
-
+            'logo_url' => 'https://static.wikia.nocookie.net/tales-of-rwby-encyclopedia/images/b/b2/White_Fang_v2.png'
+		]);
+		
         $generic = Company::create([
             'name' => 'Generic Corp',
             'code' => 'GENERIC',

@@ -11,11 +11,13 @@ A full-stack web application with role-based access control, company-based themi
 
 - ✅ **Multi-tenant Architecture** - Multiple companies with isolated data
 - ✅ **Dynamic Theming** - Company-based color schemes applied on login
+- ✅ **Company Branding** - Logo support with fallback to company name
 - ✅ **Role-Based Access Control** - Hierarchical permissions (System → Module → Submodule)
 - ✅ **Token Authentication** - Laravel Sanctum for secure API access
 - ✅ **Responsive UI** - Modern React interface with expandable navigation
 - ✅ **Search Functionality** - Real-time module search and filtering
 - ✅ **Docker Containerized** - Easy setup and deployment
+- ✅ **Enhanced Visibility** - Improved UI elements for better contrast
 
 ## 🏗️ Tech Stack
 
@@ -82,18 +84,21 @@ exit
 - **Username**: `weissschnee`
 - **Password**: `Passw0rd!`
 - **Company**: `Schnee Dust Company`
+- **Theme**: Light blue/cyan colors
 - **Access**: 10 submodules (full admin access)
 
-### User 2 - Mistral Trading Group (Sales & Inventory)
+### User 2 - White Fang Group (Sales & Inventory)
 - **Username**: `Adam`
 - **Password**: `Passw0rd!`
-- **Company**: `Mistral Trading Group`
+- **Company**: `White Fang Group`
+- **Theme**: Dark navy/red colors
 - **Access**: 6 submodules (sales and inventory focused)
 
 ### User 3 - Generic Corp (Limited)
 - **Username**: `testuser`
 - **Password**: `Passw0rd!`
 - **Company**: `Generic Corp`
+- **Theme**: Default blue colors
 - **Access**: 2 submodules (limited access)
 
 ## 📁 Project Structure
@@ -226,11 +231,13 @@ curl -X POST http://localhost:8000/api/login \
 - Demo credentials displayed
 
 ### Dashboard
-- Dynamic theming based on company
+- Dynamic theming based on company colors
+- Company logo display in header (with fallback to name badge)
 - Hierarchical navigation tree
 - Expandable modules and submodules
-- Search functionality
-- User profile display
+- Search functionality with real-time filtering
+- User profile display with username
+- High-contrast logout button for better visibility
 
 ## 🤝 Contributing
 

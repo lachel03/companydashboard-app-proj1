@@ -20,6 +20,15 @@
   font-weight: 600;
 }
 
+.company-logo {
+  height: 50px;
+  width: auto;
+  object-fit: contain;
+  background: white;
+  padding: 5px 15px;
+  border-radius: 8px;
+}
+
 .company-badge {
   background: rgba(255, 255, 255, 0.2);
   padding: 6px 15px;
@@ -51,16 +60,20 @@
 }
 
 .logout-button {
-  padding: 8px 20px;
-  background: rgba(255, 255, 255, 0.2);
-  color: white;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 5px;
+  padding: 10px 24px;
+  background: white;
+  color: #333;
+  border: 2px solid white;
+  border-radius: 6px;
   cursor: pointer;
-  font-weight: 500;
+  font-weight: 600;
+  font-size: 14px;
   transition: all 0.3s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .logout-button:hover {
-  background: rgba(255, 255, 255, 0.3);
+  background: #f0f0f0;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }

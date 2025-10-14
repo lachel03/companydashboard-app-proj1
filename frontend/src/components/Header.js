@@ -16,7 +16,11 @@ const Header = () => {
     <header className="header">
       <div className="header-left">
         <h1 className="header-title">Company Dashboard</h1>
-        <span className="company-badge">{company?.name}</span>
+        {company?.logo_url ? (
+          <img src={company.logo_url} alt={company.name} className="company-logo" />
+        ) : (
+          <span className="company-badge">{company?.name}</span>
+        )}
       </div>
       <div className="header-right">
         <div className="user-info">

@@ -105,7 +105,8 @@ const Login = () => {
         <div className="demo-credentials">
           <p><strong>Demo Credentials:</strong></p>
           <p>weissschnee / Passw0rd! / Schnee Dust Company</p>
-          <p>Adam / Passw0rd! / Mistral Trading Group</p>
+          <p>Adam / Passw0rd! / White Fang Group</p>
+		  <p>testuser / Passw0rd! / Generic Corp</p>
         </div>
       </div>
     </div>
