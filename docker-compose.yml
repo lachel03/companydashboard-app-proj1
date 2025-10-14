@@ -1,0 +1,76 @@
+services:
+  # PostgreSQL Database
+  db:
+    image: postgres:15-alpine
+    container_name: project_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: laravel_app
+      POSTGRES_USER: laravel_user
+      POSTGRES_PASSWORD: laravel_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - app_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U laravel_user -d laravel_app"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Laravel Backend
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: backend_app
+    restart: unless-stopped
+    working_dir: /var/www
+    volumes:
+      - ./backend:/var/www
+    ports:
+      - "8000:8000"
+    environment:
+      DB_CONNECTION: pgsql
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_DATABASE: laravel_app
+      DB_USERNAME: laravel_user
+      DB_PASSWORD: laravel_password
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - app_network
+
+  # React Frontend
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: frontend_app
+    restart: unless-stopped
+    working_dir: /app
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    ports:
+      - "3000:3000"
+    environment:
+      REACT_APP_API_URL: http://localhost:8000
+      WATCHPACK_POLLING: "true"
+    depends_on:
+      - backend
+    networks:
+      - app_network
+    stdin_open: true
+    tty: true
+
+networks:
+  app_network:
+    driver: bridge
+
+volumes:
+  postgres_data:

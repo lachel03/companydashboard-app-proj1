@@ -1,0 +1,1 @@
+nice it works on http://127.0.0.1:3000/login  anyway to change mistral trading group to White Fang Group? and change logout button since its barely visible on schnee dust company's dashboard, Change company-badge instead of names to images of the corporation like link to a picture?
