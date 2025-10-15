@@ -12,15 +12,19 @@ const Login = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   
-  const { login, isAuthenticated } = useAuth();
+  const { login, isAuthenticated, loading: authLoading } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
+    // Wait for auth to finish loading before checking
+    if (authLoading) return;
+    
     if (isAuthenticated) {
       navigate('/dashboard');
+    } else {
+      fetchCompanies();
     }
-    fetchCompanies();
-  }, [isAuthenticated, navigate]);
+  }, [isAuthenticated, authLoading, navigate]);
 
   const fetchCompanies = async () => {
     try {
@@ -46,6 +50,11 @@ const Login = () => {
     
     setLoading(false);
   };
+
+  // Show loading while checking auth
+  if (authLoading) {
+    return <div className="login-container"><div className="loading">Loading...</div></div>;
+  }
 
   return (
     <div className="login-container">
@@ -106,7 +115,6 @@ const Login = () => {
           <p><strong>Demo Credentials:</strong></p>
           <p>weissschnee / Passw0rd! / Schnee Dust Company</p>
           <p>Adam / Passw0rd! / White Fang Group</p>
-		  <p>testuser / Passw0rd! / Generic Corp</p>
         </div>
       </div>
     </div>

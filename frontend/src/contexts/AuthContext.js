@@ -18,21 +18,42 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (token) {
-      loadUser();
-    } else {
-      setLoading(false);
-    }
-  }, [token]);
+    const initAuth = async () => {
+      const savedToken = localStorage.getItem('token');
+      const savedCompany = localStorage.getItem('company');
+      
+      if (savedToken) {
+        setToken(savedToken);
+        
+        // Restore company from localStorage
+        if (savedCompany) {
+          const companyData = JSON.parse(savedCompany);
+          setCompany(companyData);
+          applyTheme(companyData);
+        }
+        
+        // Load user data
+        await loadUser();
+      } else {
+        setLoading(false);
+      }
+    };
+    
+    initAuth();
+  }, []);
 
   const loadUser = async () => {
     try {
       const response = await authAPI.getUser();
       setUser(response.data.user);
       setCompany(response.data.company);
+      applyTheme(response.data.company);
     } catch (error) {
       console.error('Failed to load user:', error);
-      logout();
+      // Only logout if token is invalid (401/403)
+      if (error.response?.status === 401 || error.response?.status === 403) {
+        logout();
+      }
     } finally {
       setLoading(false);
     }

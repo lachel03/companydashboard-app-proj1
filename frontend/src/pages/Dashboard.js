@@ -11,16 +11,20 @@ const Dashboard = () => {
   const [selectedSubmodule, setSelectedSubmodule] = useState(null);
   const [loading, setLoading] = useState(true);
   
-  const { user, company, isAuthenticated } = useAuth();
+  const { user, company, isAuthenticated, loading: authLoading } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
+    // Wait for auth to finish loading
+    if (authLoading) return;
+    
     if (!isAuthenticated) {
       navigate('/login');
       return;
     }
+    
     fetchModules();
-  }, [isAuthenticated, navigate]);
+  }, [isAuthenticated, authLoading, navigate]);
 
   const fetchModules = async () => {
     try {
@@ -37,7 +41,8 @@ const Dashboard = () => {
     setSelectedSubmodule(submodule);
   };
 
-  if (loading) {
+  // Show loading while auth is being checked
+  if (authLoading || loading) {
     return <div className="loading">Loading...</div>;
   }
 
