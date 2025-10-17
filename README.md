@@ -253,7 +253,7 @@ This project is licensed under the MIT License.
 
 ## 👥 Authors
 
-- Lachel03
+- Lachel03 - [GitHub Profile](https://github.com/lachel03)  
 
 ## 🙏 Acknowledgments
 
